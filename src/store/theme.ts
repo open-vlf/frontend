@@ -4,7 +4,7 @@ export function updateTheme(name: string) {
   const relElements = Array.prototype.slice.call(document.getElementsByTagName('link'))
   relElements.forEach((element: HTMLElement) => {
     if (element.getAttribute('href') && element.getAttribute('href').includes('/assets/styles/'))
-      element.setAttribute('href', `/src/assets/styles/${name}.css`)
+      element.setAttribute('href', `https://vlf-craam.web.app/assets/styles/${name}.css`)
   })
 }
 

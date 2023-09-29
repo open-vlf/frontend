@@ -1,4 +1,4 @@
-import * as path from 'path'
+import * as path from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Markdown from 'vite-plugin-vue-markdown'
@@ -16,7 +16,7 @@ import pkg from './package.json'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
-process.env.VITE_APP_BUILD_EPOCH = new Date().getTime()
+process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
 process.env.VITE_APP_VERSION = pkg.version
 
 /**

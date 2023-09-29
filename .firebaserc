@@ -1,5 +1,13 @@
 {
-  "projects": {
-    "default": "vlf-craam-a7df7"
-  }
+  "projects": {},
+  "targets": {
+    "vlf-craam-a7df7": {
+      "hosting": {
+        "vlf-craam": [
+          "vlf-craam"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
