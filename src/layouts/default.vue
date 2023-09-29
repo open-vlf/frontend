@@ -5,7 +5,6 @@ import AppTopBar from '../components/app/AppTopbar.vue'
 import AppMenu from '../components/app/AppMenu.vue'
 import AppFooter from '../components/app/AppFooter.vue'
 import { navigationMenu } from '@/logic'
-import {onBeforeMount} from "vue-demi";
 
 const layoutMode = ref('static')
 const layoutColorMode = ref('light')
