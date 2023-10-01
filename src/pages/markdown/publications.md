@@ -1,5 +1,7 @@
 # Publications
 
+Publications related to VLF, SAVNET and CRAAM group.
+
 [1] JORGE SAMANES; JEAN-PIERRE RAULIN; CAO JINBIN. Estimation of the nighttime height of the lower ionosphere using VLF waves propagation. 2016 URSI Asia-Pacific Radio Science Conference, August 21-25, 2016/Seoul, Korea.
 
 [2] ANTONIO A. S. MAGALHAES; JEAN-PIERRE RAULIN; JORGE SAMANES. Lower ionosphere nighttime height estimates using VLF waves propagation. Session ST09-URSI, MOMAG2016, July 25-29, 2016, Porto Alegre, Brazil.
