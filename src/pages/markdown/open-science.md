@@ -3,12 +3,12 @@
 Open scientific data or open research data is a type of open data focused on publishing observations and results of
 scientific activities available for anyone to analyze and reuse. A major purpose of the drive for open data is to allow
 the verification of scientific claims, by allowing others to look at the reproducibility of results. and to allow data
-from many sources to be integrated to give new knowledge.
-The modern concept of scientific data emerged in the second half of the 20th century, with the development of large
-knowledge infrastructure to compute scientific information and observation. The sharing and distribution of data has
-been early identified as an important stake but was impeded by the technical limitations of the infrastructure and the
-lack of common standards for data communication. The World Wide Web was immediately conceived as a universal protocol for
-the sharing of scientific data, especially coming from high-energy physics.
+from many sources to be integrated to give new knowledge. The modern concept of scientific data emerged in the second
+half of the 20th century, with the development of large knowledge infrastructure to compute scientific information and
+observation. The sharing and distribution of data has been early identified as an important stake but was impeded by the
+technical limitations of the infrastructure and the lack of common standards for data communication. The World Wide Web
+was immediately conceived as a universal protocol for the sharing of scientific data, especially coming from high-energy
+physics.
 
 ### References
 

@@ -10,11 +10,11 @@ onMounted(async () => {
 })
 
 useHead({
-  title: 'VLF CRAAM',
+  title: 'Open VLF',
   meta: [
     {
       name: 'description',
-      content: 'VLF CRAAM web application',
+      content: 'Open VLF web application',
     },
   ],
 })

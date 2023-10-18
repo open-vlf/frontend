@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 import axios from 'axios'
 
 export type typeABCDF = 'A' | 'B' | 'C' | 'D' | 'F'
 
 const providerToExtension: Map<string, string> = new Map([
-  ['savnet', 'mat'],
-  ['awesome', 'fits'],
+  ['awesome', 'mat'],
+  ['savnet', 'fits'],
 ])
 
 const mapABCDF: Map<typeABCDF, Array<string>> = new Map([
@@ -17,15 +17,15 @@ const mapABCDF: Map<typeABCDF, Array<string>> = new Map([
 ])
 
 export interface File {
-  CC: string
+  CC?: string
   dateTime: number
   endpointType: string
   fileName: string
   path: string
   stationId: string
   timestamp: number
-  transmitter: string
-  typeABCDF: 'A' | 'B' | 'C' | 'D' | 'F'
+  transmitter?: string
+  typeABCDF?: 'A' | 'B' | 'C' | 'D' | 'F'
   url: string
 }
 
@@ -65,6 +65,7 @@ export const useDemoStore = defineStore('demo', {
       this.transmitterFiles = []
     },
     clearPlot(): void {
+      // @ts-ignore
       this.plot = null
     },
     clearFiles(): void {
@@ -90,24 +91,26 @@ export const useDemoStore = defineStore('demo', {
             this.receivers.get(value.year)?.add(station)
           })
         })
-      }
-      catch (e) {
+      } catch (e) {
         alert('Couldn\'t fetch the years and stations information, please try again later')
       }
     },
     async searchMap(
+      provider: string,
       year?: number,
       type?: 'narrowband' | 'broadband',
       station?: string,
-      provider?: string,
     ): Promise<void> {
       try {
-        const fileEndsWith = provider ? providerToExtension.get(provider) : providerToExtension.get('SAVNET')
+        const fileEndsWith = providerToExtension.get(provider)
 
         let url = 'https://get-matrix-sm6mx5mo3a-uc.a.run.app/'
 
-        if (year && type && station)
+        if (year && type && station) {
           url = `${url}?year=${year}&station=${station}&type=${type.toLowerCase()}&fileEndsWith=${fileEndsWith ?? 'mat'}`
+        } else {
+          url = `${url}?fileEndsWith=${fileEndsWith ?? 'mat'}`
+        }
 
         const response = await axios.get(url)
 
@@ -117,21 +120,19 @@ export const useDemoStore = defineStore('demo', {
           (value: { count: number; date: string; stations: Array<string> }) => {
             this.search.set(value.date, value.count)
           })
-      }
-      catch (e) {
-        alert('Couldn\'t fetch the year records, please try again later')
+      } catch (e) {
+        this.search = new Map<string, number>()
       }
     },
     async searchPlot(file: File): Promise<void> {
       try {
         const response = await axios.post(
           'https://graph-generator-sm6mx5mo3a-uc.a.run.app',
-          { path: file.path },
+          {path: file.path},
         )
 
         this.plot = response.data
-      }
-      catch (e) {
+      } catch (e) {
         alert('Could not generate the plot for this file, please try again later.')
       }
     },
@@ -139,9 +140,10 @@ export const useDemoStore = defineStore('demo', {
       year: number,
       station: string,
       date: Date,
+      provider?: string,
     ): Promise<Array<string>> {
-      const files = await this.searchFiles(year, 'narrowband', station, date)
-      const origins = files.map(file => file.fileName.slice(14, 17))
+      const files = await this.searchFiles(year, 'narrowband', station, date, provider)
+      const origins = files.map(file => file.transmitter ?? file.fileName.slice(14, 17))
       const result = [...new Set(origins)]
 
       this.transmitters = result
@@ -171,16 +173,19 @@ export const useDemoStore = defineStore('demo', {
         )
 
         this.files = response.data.map((file) => {
+          if (fileEndsWith?.includes('fits')) {
+            return file;
+          }
+
           return {
             ...file,
-            resolution: mapABCDF.get(file.typeABCDF)?.[0],
-            phase: mapABCDF.get(file.typeABCDF)?.[0],
+            resolution: mapABCDF.get(file.typeABCDF!)?.[0],
+            phase: mapABCDF.get(file.typeABCDF!)?.[0],
           }
         })
 
-        return response.data
-      }
-      catch (e) {
+        return this.files
+      } catch (e) {
         alert('No records found')
       }
 

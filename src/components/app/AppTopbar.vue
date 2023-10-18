@@ -41,7 +41,7 @@ onBeforeMount(() => {
         alt="Mackenzie logo"
         src="https://logodownload.org/wp-content/uploads/2017/09/mackenzie-logo-3.png"
       >
-      <span>Open VLF CRAAM</span>
+      <span>Open VLF</span>
     </router-link>
     <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">
       <i class="pi pi-bars" />

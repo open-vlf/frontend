@@ -2,7 +2,7 @@ export const navigationMenu = [
   {
     label: 'Very Low Frequency (VLF)',
     items: [
-      { label: 'Search for data', icon: 'pi pi-fw pi-search', to: '/' },
+      { label: 'Explore data', icon: 'pi pi-fw pi-search', to: '/' },
       { label: 'What is', icon: 'pi pi-fw pi-info-circle', to: '/markdown/what-is' },
       { label: 'VLF', icon: 'pi pi-fw pi-sun', to: '/markdown/vlf' },
     ],
