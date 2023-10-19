@@ -55,6 +55,9 @@ export default defineConfig({
     Unocss({}),
     Vue({
       include: [/\.vue$/, /\.md$/],
+      script: {
+        defineModel: true
+      },
       template: {
         compilerOptions: {
           directiveTransforms: {

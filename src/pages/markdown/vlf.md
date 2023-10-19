@@ -1,10 +1,6 @@
 # VLF
 
-**Very Low Frequency (VLF)** signals typically occupy the frequency range from 3 kHz (kilohertz) to 30 kHz signals and
-are known to propagate over long distances within the waveguide bounded by the Earth’s surface and the lower
-ionosphere (D-region at daytime and E-region at nighttime). The longer wavelengths from VLF compared to higher-frequency
-radio waves, which gives them unique propagation characteristics. They can be affected by factors like the Earth's
-curvature, ground conductivity, and the ionosphere.
+**Very Low Frequency (VLF)** signals typically occupy the frequency range from 3 kHz (kilohertz) to 30 kHz signals and are known to propagate over long distances within the waveguide bounded by the Earth’s surface and the lower ionosphere (D-region at daytime and E-region at nighttime). The longer wavelengths from VLF compared to higher-frequency radio waves, which gives them unique propagation characteristics. They can be affected by factors like the Earth's curvature, ground conductivity, and the ionosphere.
 
 <br>
 <br>

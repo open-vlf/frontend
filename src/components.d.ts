@@ -13,6 +13,7 @@ declare module 'vue' {
     AppProfile: typeof import('./components/app/AppProfile.vue')['default']
     AppSubmenu: typeof import('./components/app/AppSubmenu.vue')['default']
     AppTopbar: typeof import('./components/app/AppTopbar.vue')['default']
+    DownloadDialog: typeof import('./components/DownloadDialog.vue')['default']
     Filters: typeof import('./components/Filters.vue')['default']
     Foo: typeof import('./components/basic/Foo.vue')['default']
     Heatmap: typeof import('./components/Heatmap.vue')['default']
