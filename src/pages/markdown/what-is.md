@@ -1,11 +1,14 @@
 # What is
 
-This site is maintained by [**CRAAM**](https://www.mackenzie.br/centro-de-radio-astronomia-e-astrofisica-mackenzie) (
-Mackenzie Radio Astronomy and Astrophysics Center) a research center operated by the [**UPM**](https://www.mackenzie.br/)
-(Mackenzie Presbyterian University) and [**INPE**](https://www.gov.br/inpe/pt-br) (National Institute for Space
-Research), to provide public and free access for researchers, students and the interested
+This site is maintained by 
+[**CRAAM**](https://www.mackenzie.br/centro-de-radio-astronomia-e-astrofisica-mackenzie) (Mackenzie Radio Astronomy and Astrophysics Center) 
+a research center operated by the 
+[**UPM**](https://www.mackenzie.br/) (Mackenzie Presbyterian University) and 
+[**INPE**](https://www.gov.br/inpe/pt-br) (National Institute for Space Research), 
+to provide public and free access for researchers, students and the interested
 public access to **VLF** (Very Low Frequency) data from CRAAM's Antennas systems. All data stored is supported by 
-[**Amazon AWS**](https://aws.amazon.com) supported by [**AWS Open Data Program**](https://aws.amazon.com/pt/opendata/).
+[**Amazon AWS**](https://aws.amazon.com) supported by 
+[**AWS Open Data Program**](https://aws.amazon.com/pt/opendata/).
 
 **Very Low Frequency (VLF)** signals can be used for navigation services, communication with submarines and are a
 powerful tool to study the low altitude Earth's ionosphere, atmospheric and geophysics phenomena, space weather,
