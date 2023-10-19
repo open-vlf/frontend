@@ -14,7 +14,7 @@ import LinkAttributes from "markdown-it-link-attributes";
 import vueI18n from "@intlify/unplugin-vue-i18n/vite";
 import pkg from "./package.json";
 
-const markdownWrapperClasses = "prose prose-sm m-auto text-left max-w-full";
+const markdownWrapperClasses = "prose prose-sm m-auto text-left";
 
 process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString();
 process.env.VITE_APP_VERSION = pkg.version;

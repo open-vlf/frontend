@@ -29,4 +29,8 @@ useHead({
 
 <style lang="scss">
 @import "App.scss";
+
+:deep(.prose) {
+  max-width: 100% !important;
+}
 </style>

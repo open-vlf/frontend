@@ -3,6 +3,7 @@
 
 .prose {
   --prism-font-family: 'Input Mono', monospace;
+  max-width: 100% !important;
 }
 
 html:not(.dark) .prose {
