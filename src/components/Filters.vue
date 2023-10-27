@@ -562,7 +562,11 @@ onBeforeMount(onInitial);
               Plot
             </p>
 
-            <img class="flex q-mt-md" alt="Plot view" :src="demo.getPlot" />
+            <img
+              class="flex q-mt-md w-100%"
+              alt="Plot view"
+              :src="demo.getPlot"
+            />
           </div>
         </div>
       </div>
