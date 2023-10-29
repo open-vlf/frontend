@@ -19,3 +19,9 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VLF_CRAAM_A7DF7 }}'
           projectId: vlf-craam-a7df7
           target: vlf-craam
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VLF_CRAAM_A7DF7 }}'
+          projectId: vlf-craam-a7df7
+          target: open-vlf

@@ -5,6 +5,9 @@
       "hosting": {
         "vlf-craam": [
           "vlf-craam"
+        ],
+        "open-vlf": [
+          "open-vlf"
         ]
       }
     }
