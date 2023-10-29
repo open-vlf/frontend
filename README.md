@@ -8,7 +8,7 @@
 
 <img alt="VLF waves propagation GIF" src="https://github.com/Rogerio-mack/VLF/raw/main/waves_propagation_gif.gif" align="center"/>
 
-This website is maintained by
+This platform is maintained by
 [CRAAM](https://www.mackenzie.br/centro-de-radio-astronomia-e-astrofisica-mackenzie) (Mackenzie Radio Astronomy and
 Astrophysics Center),
 a research center operated by [UPM](https://www.mackenzie.br/) (Mackenzie Presbyterian University)
