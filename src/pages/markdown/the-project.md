@@ -3,7 +3,7 @@
 ## Cite Us
 
 Kauffmann, DHV; Santiago, LS; Raulin JP; Correia, E; Oliveira, R de. (2023) **Open
-VLF: *Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data***. URL: https://vlf-craam.web.app/
+VLF: *Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data***. URL: https://open-vlf.web.app/
 
 <br>
 <br>

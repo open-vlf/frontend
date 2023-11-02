@@ -19,7 +19,7 @@ function toggleUserMenu(event: any) {
 }
 
 function redirectToGithub(event: any) {
-  window.open("https://github.com/vlf-craam", "_blank");
+  window.open("https://github.com/open-vlf", "_blank");
 }
 
 function onChangeTheme(theme: string) {
