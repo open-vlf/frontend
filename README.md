@@ -1,6 +1,6 @@
 <img style="border-radius: 1rem" alt="Mackenzie University logo" src="https://hospital.mackenzie.br/fileadmin/CONFIGURACOES/DEFAULT_17/Resources/Public/Template/img/og_image.png" align="right" width="200" >
 
-# Open VLF: Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data
+# Open VLF: Open Data Platform for Very Low Frequency Data
 
 > Kauffmann, DHV; Santiago, LS; Raulin, JP; Correia, E; Oliveira, R de.
 
@@ -15,7 +15,7 @@ a research center operated by [UPM](https://www.mackenzie.br/) (Mackenzie Presby
 and [INPE](https://www.gov.br/inpe/pt-br) (National Institute for Space Research),
 to provide public and free access for researchers, students, and the interested public to VLF (Very Low Frequency) data
 from CRAAM's antenna systems. Amazon AWS supports all data stored through
-the [AWS Open Data Program](https://aws.amazon.com/pt/opendata/).
+the [AWS Open Data Program](https://registry.opendata.aws/craam-open-vlf/).
 
 Very Low Frequency (VLF) signals can be used for navigation services, communication with submarines, and are a powerful
 tool to study the low-altitude Earth's ionosphere, atmospheric and geophysics phenomena, space weather, magnetic field,
@@ -30,4 +30,4 @@ both systems are available, with occasional gaps during periods when data collec
 Data provided here is stored in different formats (.mat for AWESOME antenna system and .fits for SAVNET system). For
 documentation and details, please visit the project website [Open VLF](https://open-vlf.web.app).
 
-### [Project draft](https://github.com/Rogerio-mack/VLF/blob/main/DRAFT_project_Open_VLF.pdf)
+### [Access the Capstone Project Document](https://github.com/open-vlf/academic/blob/main/Open%20VLF%20TCC.pdf)
