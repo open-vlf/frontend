@@ -8,11 +8,11 @@ VLF: *Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data***
 <br>
 <br>
 
-EC thanks the Conselho Nacional de Desenvolvimento
-Científico e Tecnológico (CNPq, Brazil, nos.: 406690/2013-
-8, 442101/2018-0 and 306818/2019-1), Fundação de
-Amparo à Pesquisa do Estado de São Paulo (FAPESP,
-Brazil, no.: 2019/05455-2) for individual research support.
+Agradecimentos ao Conselho Nacional de Desenvolvimento
+Científico e Tecnológico (**CNPq**, Brazil, nos.: 406690/2013-
+8, 442101/2018-0 and 306818/2019-1) e à Fundação de
+Amparo à Pesquisa do Estado de São Paulo (**FAPESP**,
+Brazil, no.: 2019/05455-2) pelo suporte à pesquisa para a coleta desses dados que viabilizaram esta aplicação. 
 
 ### Contact Us
 
