@@ -14,7 +14,7 @@ Científico e Tecnológico (**CNPq**, Brazil, nos.: 406690/2013-
 Amparo à Pesquisa do Estado de São Paulo (**FAPESP**,
 Brazil, no.: 2019/05455-2) pelo suporte à pesquisa para a coleta desses dados que viabilizaram esta aplicação. 
 
-### Contact Us
+### Contact Us 
 
 > rogerio.oliveira@mackenzie.br | Phone | WhatsApp +55 (11) 97515-1919
 
