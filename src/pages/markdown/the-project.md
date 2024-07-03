@@ -1,14 +1,12 @@
 # The Project
 
-## Cite Us | Como Citar esta Aplicação
+## Cite Us
 
 Kauffmann, DHV; Santiago, LS; Raulin JP; Correia, E; Oliveira, R de. (2023) **Open
 VLF: *Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data***. URL: https://open-vlf.web.app/
 
 <br>
 <br>
-
-## Thanks | Agradecimentos
 
 EC (Correia, E), e os demais colaboradores, agradecem ao Conselho Nacional de Desenvolvimento
 Científico e Tecnológico (**CNPq**, Brazil, nos.: 406690/2013-
