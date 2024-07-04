@@ -1,5 +1,7 @@
 # Publications
 
+<br>
+
 Publications related to VLF, SAVNET and CRAAM group.
 
 [1] JORGE SAMANES; JEAN-PIERRE RAULIN; CAO JINBIN. Estimation of the nighttime height of the lower ionosphere using VLF
