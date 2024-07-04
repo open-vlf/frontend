@@ -8,7 +8,7 @@ VLF: *Scientific Open Data Initiative for CRAAM's SAVNET and AWESOME VLF Data***
 <br>
 <br>
 
-## Thanks...
+## Thanks ...
 
 EC (Correia, E), e os demais colaboradores, agradecem ao Conselho Nacional de Desenvolvimento
 Científico e Tecnológico (**CNPq**, Brazil, nos.: 406690/2013-
