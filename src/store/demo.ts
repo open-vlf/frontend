@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { getAuthHeaders } from "../modules/firebase";
 
 export type typeABCDF = "A" | "B" | "C" | "D" | "F";
 
@@ -85,7 +86,10 @@ export const useDemoStore = defineStore("demo", {
         >(
           `https://get-years-stations-sm6mx5mo3a-uc.a.run.app/?fileEndsWith=${
             fileEndsWith ?? "mat"
-          }`
+          }`,
+          {
+            headers: await getAuthHeaders(),
+          }
         );
 
         this.years = new Set<number>();
@@ -126,7 +130,9 @@ export const useDemoStore = defineStore("demo", {
           url = `${url}?fileEndsWith=${fileEndsWith ?? "mat"}`;
         }
 
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: await getAuthHeaders(),
+        });
 
         this.search = new Map<string, number>();
 
@@ -143,7 +149,10 @@ export const useDemoStore = defineStore("demo", {
       try {
         const response = await axios.post(
           "https://graph-generator-sm6mx5mo3a-uc.a.run.app",
-          { path: file.path }
+          { path: file.path },
+          {
+            headers: await getAuthHeaders(),
+          }
         );
 
         this.plot = response.data;
@@ -200,7 +209,10 @@ export const useDemoStore = defineStore("demo", {
             date.getMonth() + 1
           }&day=${date.getDate()}&station=${station}&type=${type.toLowerCase()}&fileEndsWith=${
             fileEndsWith ?? "mat"
-          }`
+          }`,
+          {
+            headers: await getAuthHeaders(),
+          }
         );
 
         this.files = response.data.map((file) => {

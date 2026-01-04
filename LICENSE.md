@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2021 Ville Säävuori
+Copyright (c) 2023 Daniel H. V. Kauffmann, Lucas S. Garcia, Rogerio de Oliveira.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

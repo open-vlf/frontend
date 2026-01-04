@@ -94,7 +94,6 @@ import ToastService from 'primevue/toastservice'
 import type { UserModule } from '@/types'
 import ProgressSpinner from "primevue/progressspinner";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const install: UserModule = ({ app, router, isClient }) => {
   // Chart.js
   ChartJs.register(MatrixController, MatrixElement)

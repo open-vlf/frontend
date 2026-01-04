@@ -1,7 +1,6 @@
 import { ref } from 'vue'
 
 export default () => {
-  // @ts-expect-error Need Error Masking
   const tableData: Ref<any[]> = ref([])
   const filters = ref({})
   const dataTableRef = ref<HTMLElement | null>(null)

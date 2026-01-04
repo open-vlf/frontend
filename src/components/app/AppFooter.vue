@@ -9,7 +9,7 @@ const version = ref(import.meta.env.VITE_APP_VERSION)
       height="40"
       src="https://logodownload.org/wp-content/uploads/2017/09/mackenzie-logo.png"
     >
-    <span class="font-medium ml-2">© Copyright 2023 - Instituto Presbiteriano Mackenzie - v{{ version }}</span>
+    <span class="font-medium ml-2">© Copyright 2026 - Instituto Presbiteriano Mackenzie - v{{ version }}</span>
   </div>
 </template>
 
