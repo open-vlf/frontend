@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-const props = defineProps<{
-  header: string
-  icon: string
-  color?: string
-}>()
+defineProps<{
+  header: string;
+  icon: string;
+  color?: string;
+}>();
 </script>
 
 <template>

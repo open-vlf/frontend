@@ -1,22 +1,22 @@
 import * as path from "node:path";
-import { defineConfig } from "vite";
+import vueI18n from "@intlify/unplugin-vue-i18n/vite";
 import Vue from "@vitejs/plugin-vue";
-import Markdown from "vite-plugin-vue-markdown";
+import LinkAttributes from "markdown-it-link-attributes";
+import Prism from "markdown-it-prism";
+import Unocss from "unocss/vite";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { defineConfig } from "vite";
+import Inspect from "vite-plugin-inspect";
 import Pages from "vite-plugin-pages";
 import Restart from "vite-plugin-restart";
-import Components from "unplugin-vue-components/vite";
 import Layouts from "vite-plugin-vue-layouts";
-import AutoImport from "unplugin-auto-import/vite";
-import Inspect from "vite-plugin-inspect";
-import Unocss from "unocss/vite";
-import Prism from "markdown-it-prism";
-import LinkAttributes from "markdown-it-link-attributes";
-import vueI18n from "@intlify/unplugin-vue-i18n/vite";
+import Markdown from "vite-plugin-vue-markdown";
 import pkg from "./package.json";
 
 const markdownWrapperClasses = "prose prose-sm m-auto text-left";
 
-process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString();
+process.env.VITE_APP_BUILD_EPOCH = Date.now().toString();
 process.env.VITE_APP_VERSION = pkg.version;
 
 /**
@@ -94,7 +94,7 @@ export default defineConfig({
         if (route.name === "components") {
           return {
             ...route,
-            beforeEnter: (route) => {
+            beforeEnter: (_route) => {
               // console.log(route)
             },
           };

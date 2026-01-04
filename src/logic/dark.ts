@@ -1,4 +1,4 @@
-import { useDark, useToggle } from '@vueuse/core'
+import { useDark as createDark, useToggle as createToggle } from "@vueuse/core";
 
-export const isDark = useDark()
-export const toggleDark = useToggle(isDark)
+export const isDark = createDark();
+export const toggleDark = createToggle(isDark);

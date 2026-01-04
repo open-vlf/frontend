@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import consola from "consola";
+import { useHead as setHead } from "@vueuse/head";
 
-import { useDataStore } from "@/store/data";
-
-const dataStore = useDataStore();
-
-onMounted(async () => {
-  await dataStore
-    .$load({ name: "app-data" })
-    .catch((error: any) => consola.log(error));
-});
-
-useHead({
+setHead({
   title: "Open VLF",
   meta: [
     {

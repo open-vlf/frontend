@@ -1,84 +1,130 @@
 <script setup lang='ts'>
-import * as helpers from 'chart.js/helpers'
-import 'chartjs-adapter-date-fns'
-import { ref } from 'vue'
-import { enUS } from 'date-fns/locale'
-import { format } from 'date-fns'
-import { noZoneDate } from '@/utils'
+import * as helpers from "chart.js/helpers";
+import "chartjs-adapter-date-fns";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
+import { ref } from "vue";
+import { noZoneDate } from "@/utils";
+
+type MatrixDatum = {
+  d: string;
+  fullDate: Date;
+  v: number;
+};
+
+type MatrixDataset = {
+  data: Array<MatrixDatum | undefined>;
+};
+
+type MatrixContext = {
+  chart: {
+    chartArea?: {
+      right: number;
+      left: number;
+      top: number;
+      bottom: number;
+    };
+  };
+  dataset: MatrixDataset;
+  dataIndex: number;
+};
+
+type TooltipContextItem = {
+  raw: {
+    fullDate: Date;
+  };
+  dataset: MatrixDataset;
+  dataIndex: number;
+};
+
+type ClickContext = {
+  chart: {
+    tooltip: {
+      dataPoints: Array<{
+        raw: {
+          d: string;
+          fullDate: Date;
+          v: number;
+        };
+      }>;
+    };
+  };
+};
 
 const props = defineProps({
   data: {
     type: Array<object>,
     required: true,
   },
-})
+});
 
-const emit = defineEmits<{
-  (e: 'onSelectDate', date: Date, records: number): void
-}>()
+const emit =
+  defineEmits<(e: "onSelectDate", date: Date, records: number) => void>();
 
 const data = ref({
-  datasets: [{
-    label: 'Matrix',
-    data: props.data,
-    borderWidth: 1,
-    hoverBackgroundColor: 'red',
-    hoverBorderColor: 'white',
-    width(c: any) {
-      const a = c.chart.chartArea || {}
-      return (a.right - a.left) / 53 - 1
-    },
-    height(c: any) {
-      const a = c.chart.chartArea || {}
-      return (a.bottom - a.top) / 7 - 1
-    },
-    backgroundColor(c: any) {
-      if (c.dataset.data[c.dataIndex]) {
-        const value = c.dataset.data[c.dataIndex].v
-        const alpha = value ? (10 + value) / 60 : 0
+  datasets: [
+    {
+      label: "Matrix",
+      data: props.data,
+      borderWidth: 1,
+      hoverBackgroundColor: "red",
+      hoverBorderColor: "white",
+      width(c: MatrixContext) {
+        const a = c.chart.chartArea || {};
+        return (a.right - a.left) / 53 - 1;
+      },
+      height(c: MatrixContext) {
+        const a = c.chart.chartArea || {};
+        return (a.bottom - a.top) / 7 - 1;
+      },
+      backgroundColor(c: MatrixContext) {
+        if (c.dataset.data[c.dataIndex]) {
+          const value = c.dataset.data[c.dataIndex].v;
+          const alpha = value ? (10 + value) / 60 : 0;
 
-        return helpers.color('green').alpha(alpha).rgbString()
-      }
+          return helpers.color("green").alpha(alpha).rgbString();
+        }
 
-      return helpers.color('transparent').rgbString()
-    },
-    borderColor(c: any) {
-      if (c.dataset.data[c.dataIndex]) {
-        const value = c.dataset.data[c.dataIndex].v
-        const alpha = (10 + value) / 60
-        return helpers.color('green').alpha(alpha).darken(0.3).rgbString()
-      }
+        return helpers.color("transparent").rgbString();
+      },
+      borderColor(c: MatrixContext) {
+        if (c.dataset.data[c.dataIndex]) {
+          const value = c.dataset.data[c.dataIndex].v;
+          const alpha = (10 + value) / 60;
+          return helpers.color("green").alpha(alpha).darken(0.3).rgbString();
+        }
 
-      return helpers.color('transparent').rgbString()
+        return helpers.color("transparent").rgbString();
+      },
     },
-  }],
-})
+  ],
+});
 
 const options = ref({
   aspectRatio: 6.5,
-  onClick: (e: any) => {
-    const date = noZoneDate(e.chart.tooltip.dataPoints[0].raw.d)
+  onClick: (e: ClickContext) => {
+    const date = noZoneDate(e.chart.tooltip.dataPoints[0].raw.d);
 
-    emit('onSelectDate', date, e.chart.tooltip.dataPoints[0].raw.v)
+    emit("onSelectDate", date, e.chart.tooltip.dataPoints[0].raw.v);
   },
   plugins: {
     legend: false,
     tooltip: {
       displayColors: false,
       callbacks: {
-        title(context: any) {
-          return format(context[0].raw.fullDate, 'MMMM dd, yyyy')
+        title(context: TooltipContextItem[]) {
+          return format(context[0].raw.fullDate, "MMMM dd, yyyy");
         },
-        label(context: any) {
-          const v = context.dataset.data[context.dataIndex]
-          return [`Records: ${v.v}`]
+        label(context: TooltipContextItem) {
+          const v = context.dataset.data[context.dataIndex];
+          return [`Records: ${v.v}`];
         },
       },
     },
   },
   scales: {
     y: {
-      type: 'time',
+      type: "time",
       offset: true,
       adapters: {
         date: {
@@ -86,16 +132,16 @@ const options = ref({
         },
       },
       time: {
-        unit: 'day',
-        round: 'day',
+        unit: "day",
+        round: "day",
         isoWeekday: 1,
-        parser: 'i',
+        parser: "i",
         displayFormats: {
-          day: 'iiiiii',
+          day: "iiiiii",
         },
       },
       reverse: true,
-      position: 'right',
+      position: "right",
       ticks: {
         maxRotation: 0,
         autoSkip: true,
@@ -111,8 +157,8 @@ const options = ref({
       },
     },
     x: {
-      type: 'time',
-      position: 'bottom',
+      type: "time",
+      position: "bottom",
       offset: true,
       adapters: {
         date: {
@@ -120,11 +166,11 @@ const options = ref({
         },
       },
       time: {
-        unit: 'month',
-        round: 'week',
+        unit: "month",
+        round: "week",
         isoWeekday: 1,
         displayFormats: {
-          month: 'MMM',
+          month: "MMM",
         },
       },
       ticks: {
@@ -146,7 +192,10 @@ const options = ref({
       top: 10,
     },
   },
-})
+});
+
+void data;
+void options;
 </script>
 
 <template>

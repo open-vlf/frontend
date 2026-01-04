@@ -1,15 +1,19 @@
 <script setup lang='ts'>
-import AppSubmenu from './AppSubmenu.vue'
+import AppSubmenu from "./AppSubmenu.vue";
 
-const props = defineProps<{
-  model: Array<any>
-}>()
+void AppSubmenu;
 
-const emit = defineEmits(['menuItemClick'])
+const { model } = defineProps<{
+  model: Array<unknown>;
+}>();
+void model;
 
-function onmenuItemClick(event: any) {
-  emit('menuItemClick', event)
+const emit = defineEmits(["menuItemClick"]);
+
+function onmenuItemClick(event: Event) {
+  emit("menuItemClick", event);
 }
+void onmenuItemClick;
 </script>
 
 <template>

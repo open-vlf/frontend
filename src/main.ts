@@ -1,7 +1,8 @@
 // register vue composition api globally
-import { ViteSSG } from "vite-ssg";
-import generatedRoutes from "virtual:generated-pages";
+
 import { setupLayouts } from "virtual:generated-layouts";
+import generatedRoutes from "virtual:generated-pages";
+import { ViteSSG } from "vite-ssg";
 import App from "./App.vue";
 import "uno.css";
 import "@sfxcode/formkit-primevue/dist/sass/formkit-primevue.scss";
@@ -11,7 +12,9 @@ const routes = setupLayouts(generatedRoutes);
 
 export const createApp = ViteSSG(App, { routes }, (ctx) => {
   // install all modules under `modules/`
-  Object.values(import.meta.globEager("./modules/*.ts")).map(
-    (i: any) => i.install?.(ctx)
-  );
+  type Module = { install?: (context: unknown) => void };
+
+  Object.values(import.meta.globEager("./modules/*.ts")).forEach((mod) => {
+    (mod as Module).install?.(ctx);
+  });
 });

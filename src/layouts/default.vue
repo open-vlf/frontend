@@ -1,128 +1,143 @@
 <script setup lang='ts'>
-import { useToast } from 'primevue/usetoast'
-import { usePrimeVue } from 'primevue/config'
-import AppTopBar from '../components/app/AppTopbar.vue'
-import AppMenu from '../components/app/AppMenu.vue'
-import AppFooter from '../components/app/AppFooter.vue'
-import { navigationMenu } from '@/logic'
+import { usePrimeVue as createPrimeVue } from "primevue/config";
+import { useToast as createToast } from "primevue/usetoast";
+import { useRoute as createRoute } from "vue-router";
+import { navigationMenu } from "@/logic";
+import AppFooter from "../components/app/AppFooter.vue";
+import AppMenu from "../components/app/AppMenu.vue";
+import AppTopBar from "../components/app/AppTopbar.vue";
 
-const layoutMode = ref('static')
-const layoutColorMode = ref('light')
-const staticMenuInactive = ref(false)
-const overlayMenuActive = ref(false)
-const mobileMenuActive = ref(false)
-const menuClick = ref(false)
-const menuActive = ref(false)
+void navigationMenu;
+void AppFooter;
+void AppMenu;
+void AppTopBar;
 
-const toast = useToast()
-const primeVue = usePrimeVue()
-const route = useRoute()
+const layoutMode = ref("static");
+const layoutColorMode = ref("light");
+const staticMenuInactive = ref(false);
+const overlayMenuActive = ref(false);
+const mobileMenuActive = ref(false);
+const menuClick = ref(false);
+const menuActive = ref(false);
 
-watch(() => route,
-  (async) => {
-    menuActive.value = false
-    toast.removeAllGroups()
+const toast = createToast();
+const primeVue = createPrimeVue();
+const route = createRoute();
+
+watch(
+  () => route,
+  () => {
+    menuActive.value = false;
+    toast.removeAllGroups();
   },
-)
+);
 
 function onWrapperClick() {
   if (!menuClick.value) {
-    overlayMenuActive.value = false
-    mobileMenuActive.value = false
+    overlayMenuActive.value = false;
+    mobileMenuActive.value = false;
   }
-  menuClick.value = false
+  menuClick.value = false;
 }
+void onWrapperClick;
 
 function onMenuToggle() {
-  menuClick.value = true
+  menuClick.value = true;
 
   if (isDesktop()) {
-    if (layoutMode.value === 'overlay') {
-      if (mobileMenuActive.value === true)
-        overlayMenuActive.value = true
+    if (layoutMode.value === "overlay") {
+      if (mobileMenuActive.value === true) overlayMenuActive.value = true;
 
-      overlayMenuActive.value = !overlayMenuActive.value
-      mobileMenuActive.value = false
+      overlayMenuActive.value = !overlayMenuActive.value;
+      mobileMenuActive.value = false;
+    } else if (layoutMode.value === "static") {
+      staticMenuInactive.value = !staticMenuInactive.value;
     }
-    else if (layoutMode.value === 'static') {
-      staticMenuInactive.value = !staticMenuInactive.value
-    }
-  }
-  else {
-    mobileMenuActive.value = !mobileMenuActive.value
+  } else {
+    mobileMenuActive.value = !mobileMenuActive.value;
   }
 }
+void onMenuToggle;
 
 function onSidebarClick() {
-  menuClick.value = true
+  menuClick.value = true;
 }
+void onSidebarClick;
 
-function onMenuItemClick(event: any) {
+function onMenuItemClick(event: { item?: { items?: unknown[] } }) {
   if (event.item && !event.item.items) {
-    overlayMenuActive.value = false
-    mobileMenuActive.value = false
+    overlayMenuActive.value = false;
+    mobileMenuActive.value = false;
   }
 }
+void onMenuItemClick;
 
 function onLayoutChange(mode: string) {
-  layoutMode.value = mode
+  layoutMode.value = mode;
 }
+void onLayoutChange;
 
 function onLayoutColorChange(mode: string) {
-  layoutColorMode.value = mode
+  layoutColorMode.value = mode;
 }
+void onLayoutColorChange;
 
 function addClass(element: HTMLElement, className: string) {
-  if (element.classList)
-    element.classList.add(className)
-  else
-    element.className += ` ${className}`
+  if (element.classList) element.classList.add(className);
+  else element.className += ` ${className}`;
 }
 
 function removeClass(element: HTMLElement, className: string) {
-  if (element.classList)
-    element.classList.remove(className)
+  if (element.classList) element.classList.remove(className);
   else
-    element.className = element.className.replace(new RegExp(`(^|\\b)${className.split(' ').join('|')}(\\b|$)`, 'gi'), ' ')
+    element.className = element.className.replace(
+      new RegExp(`(^|\\b)${className.split(" ").join("|")}(\\b|$)`, "gi"),
+      " ",
+    );
 }
 
 function isDesktop() {
-  return window.innerWidth >= 992
+  return window.innerWidth >= 992;
 }
 
 function isSidebarVisible() {
   if (isDesktop()) {
-    if (layoutMode.value === 'static')
-      return !staticMenuInactive.value
-    else if (layoutMode.value === 'overlay')
-      return overlayMenuActive.value
+    if (layoutMode.value === "static") return !staticMenuInactive.value;
+    else if (layoutMode.value === "overlay") return overlayMenuActive.value;
   }
 
-  return true
+  return true;
 }
+void isSidebarVisible;
 
-const containerClass = computed(() => ['layout-wrapper', {
-  'layout-overlay': layoutMode.value === 'overlay',
-  'layout-static': layoutMode.value === 'static',
-  'layout-static-sidebar-inactive': staticMenuInactive.value && layoutMode.value === 'static',
-  'layout-overlay-sidebar-active': overlayMenuActive.value && layoutMode.value === 'overlay',
-  'layout-mobile-sidebar-active': mobileMenuActive.value,
-  'p-input-filled': primeVue.config.inputStyle === 'filled',
-  'p-ripple-disabled': primeVue.config.ripple === false,
-  'layout-theme-light': false,
-}])
+const containerClass = computed(() => [
+  "layout-wrapper",
+  {
+    "layout-overlay": layoutMode.value === "overlay",
+    "layout-static": layoutMode.value === "static",
+    "layout-static-sidebar-inactive":
+      staticMenuInactive.value && layoutMode.value === "static",
+    "layout-overlay-sidebar-active":
+      overlayMenuActive.value && layoutMode.value === "overlay",
+    "layout-mobile-sidebar-active": mobileMenuActive.value,
+    "p-input-filled": primeVue.config.inputStyle === "filled",
+    "p-ripple-disabled": primeVue.config.ripple === false,
+    "layout-theme-light": false,
+  },
+]);
+void containerClass;
 
 function logo() {
-  return layoutColorMode.value === 'dark' ? 'images/logo-white.svg' : 'images/logo.svg'
+  return layoutColorMode.value === "dark"
+    ? "images/logo-white.svg"
+    : "images/logo.svg";
 }
+void logo;
 
 onBeforeUpdate(() => {
-  if (mobileMenuActive.value)
-    addClass(document.body, 'body-overflow-hidden')
-  else
-    removeClass(document.body, 'body-overflow-hidden')
-},
-)
+  if (mobileMenuActive.value) addClass(document.body, "body-overflow-hidden");
+  else removeClass(document.body, "body-overflow-hidden");
+});
 </script>
 
 <template>

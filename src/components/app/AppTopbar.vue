@@ -1,38 +1,51 @@
 <script setup lang="ts">
-import { useAuthStore, useThemeStore } from "@/store";
+import {
+  useAuthStore as createAuthStore,
+  useThemeStore as createThemeStore,
+} from "@/store";
 
 const emit = defineEmits(["menuToggle", "topbarMenuToggle"]);
 
-const themeStore = useThemeStore();
-const authStore = useAuthStore();
+const themeStore = createThemeStore();
+const authStore = createAuthStore();
+void authStore;
 
-const op = ref<any>(null);
-const userMenu = ref<any>(null);
+type OverlayToggle = { toggle: (event: Event) => void };
+
+const op = ref<OverlayToggle | null>(null);
+const userMenu = ref<OverlayToggle | null>(null);
 const downloadVisible = ref<boolean>(false);
+void downloadVisible;
 
-function toggle(event: any) {
-  op.value.toggle(event);
+function toggle(event: Event) {
+  op.value?.toggle(event);
 }
+void toggle;
 
-function toggleUserMenu(event: any) {
-  userMenu.value.toggle(event);
+function toggleUserMenu(event: Event) {
+  userMenu.value?.toggle(event);
 }
+void toggleUserMenu;
 
-function redirectToGithub(event: any) {
+function redirectToGithub() {
   window.open("https://github.com/open-vlf", "_blank");
 }
+void redirectToGithub;
 
 function onChangeTheme(theme: string) {
   localStorage.setItem("theme", theme);
 }
+void onChangeTheme;
 
-function onMenuToggle(event: any) {
+function onMenuToggle(event: Event) {
   emit("menuToggle", event);
 }
+void onMenuToggle;
 
-function onTopbarMenuToggle(event: any) {
+function onTopbarMenuToggle(event: Event) {
   emit("topbarMenuToggle", event);
 }
+void onTopbarMenuToggle;
 
 onBeforeMount(() => {
   if (localStorage.getItem("theme") === "theme-light") themeStore.setLight();

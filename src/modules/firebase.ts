@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInAnonymously } from "firebase/auth";
 import {
   getToken as getAppCheckToken,
   initializeAppCheck,
   ReCaptchaV3Provider,
 } from "firebase/app-check";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD13mWpT3VMTzrQf9e_7SL9smQ7A_oh76A",
@@ -31,7 +31,9 @@ async function initFirebase(): Promise<void> {
       await signInAnonymously(authInstance);
     }
 
-    const siteKey = import.meta.env.VITE_APP_CHECK_SITE_KEY as string | undefined;
+    const siteKey = import.meta.env.VITE_APP_CHECK_SITE_KEY as
+      | string
+      | undefined;
     if (!siteKey) {
       throw new Error("Missing VITE_APP_CHECK_SITE_KEY");
     }
@@ -57,7 +59,10 @@ export async function getAuthHeaders(): Promise<Record<string, string>> {
     throw new Error("Missing auth token");
   }
 
-  const { token: appCheckToken } = await getAppCheckToken(appCheckInstance, false);
+  const { token: appCheckToken } = await getAppCheckToken(
+    appCheckInstance,
+    false,
+  );
   if (!appCheckToken) {
     throw new Error("Missing App Check token");
   }

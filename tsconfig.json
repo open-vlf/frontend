@@ -4,7 +4,7 @@
     "module": "ESNext",
     "target": "es2016",
     "moduleResolution": "node",
-    "lib": ["es5" ,"DOM", "ESNext"],
+    "lib": ["es5", "DOM", "ESNext"],
     "strict": true,
     "esModuleInterop": true,
     "incremental": false,
@@ -19,13 +19,12 @@
       "vite/client",
       "vite-plugin-pages/client",
       "vite-plugin-vue-layouts/client",
-      "@intlify/vite-plugin-vue-i18n/client",
+      "@intlify/vite-plugin-vue-i18n/client"
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
     }
-
   },
   "include": [
     "src/**/*.ts",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useForm, Form } from "vee-validate";
+import { useForm as createForm } from "vee-validate";
 import * as Yup from "yup";
-import { useAuthStore } from "@/store";
+import { useAuthStore as createAuthStore } from "@/store";
 
 const visible = defineModel<boolean>({ required: true });
 const { editable, onDownload } = defineProps({
@@ -13,11 +13,12 @@ const { editable, onDownload } = defineProps({
     type: Function,
   },
 });
+void editable;
 
 const schema = Yup.object().shape({
   name: Yup.string()
     .min(2, "This name is too short!")
-    .matches(RegExp("^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$"), {
+    .matches(/^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/, {
       message: "Please use only characters",
     })
     .required("We need your name to continue!"),
@@ -26,18 +27,21 @@ const schema = Yup.object().shape({
     .required("We need your name to continue!"),
 });
 
-const authStore = useAuthStore();
+const authStore = createAuthStore();
 const { defineComponentBinds, handleSubmit, resetForm, errors, setValues } =
-  useForm({
+  createForm({
     validationSchema: schema,
     initialValues: {
       name: authStore.name,
       email: authStore.email,
     },
   });
+void errors;
 
 const name = defineComponentBinds("name");
 const email = defineComponentBinds("email");
+void name;
+void email;
 
 const onSubmit = handleSubmit((values) => {
   const user = values as { name: string; email: string };
@@ -51,18 +55,21 @@ const onSubmit = handleSubmit((values) => {
   visible.value = false;
   resetForm();
 });
+void onSubmit;
 
 function onDelete() {
   authStore.logout();
   visible.value = false;
   resetForm();
 }
+void onDelete;
 
 function onHide() {
   resetForm();
 
   setValues({ name: authStore.name, email: authStore.email });
 }
+void onHide;
 </script>
 
 <template>

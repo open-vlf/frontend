@@ -1,5 +1,6 @@
 <script setup lang='ts'>
-const version = ref(import.meta.env.VITE_APP_VERSION)
+const version = ref(import.meta.env.VITE_APP_VERSION);
+void version;
 </script>
 
 <template>

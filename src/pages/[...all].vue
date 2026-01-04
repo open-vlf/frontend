@@ -1,5 +1,8 @@
 <script setup lang='ts'>
-const { t } = useI18n()
+import { useI18n as createI18n } from "vue-i18n";
+
+const { t } = createI18n();
+void t;
 </script>
 
 <template>

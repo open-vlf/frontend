@@ -1,40 +1,61 @@
 <script setup lang='ts'>
+type MenuItem = {
+  badge?: string | number;
+  class?: unknown;
+  command?: (args: { originalEvent: Event; item: MenuItem }) => void;
+  disabled?: boolean;
+  icon?: string;
+  items?: MenuItem[];
+  label?: string;
+  separator?: boolean;
+  style?: unknown;
+  target?: string;
+  to?: unknown;
+  url?: string;
+  visible?: boolean | (() => boolean);
+};
+
 interface Props {
-  items?: Array<any>
-  root?: boolean
+  items?: Array<MenuItem>;
+  root?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const { items, root } = withDefaults(defineProps<Props>(), {
   root: false,
-})
+});
+void items;
+void root;
 
-const emit = defineEmits(['menuItemClick'])
+const emit = defineEmits(["menuItemClick"]);
 
-const activeIndex = ref(null)
-function onmenuItemClick(event: { preventDefault: () => void }, item: { disabled: any; to: any; url: any; command: (arg0: { originalEvent: any; item: any }) => void }, index: any) {
+const activeIndex = ref<number | null>(null);
+function onmenuItemClick(event: MouseEvent, item: MenuItem, index: number) {
   if (item.disabled) {
-    event.preventDefault()
-    return
+    event.preventDefault();
+    return;
   }
 
-  if (!item.to && !item.url)
-    event.preventDefault()
+  if (!item.to && !item.url) event.preventDefault();
 
   // execute command
-  if (item.command)
-    item.command({ originalEvent: event, item })
+  if (item.command) item.command({ originalEvent: event, item });
 
-  activeIndex.value = index === activeIndex.value ? null : index
+  activeIndex.value = index === activeIndex.value ? null : index;
 
-  emit('menuItemClick', {
+  emit("menuItemClick", {
     originalEvent: event,
     item,
-  })
+  });
 }
+void onmenuItemClick;
+void activeIndex;
 
-function visible(item: any) {
-  return (typeof item.visible === 'function' ? item.visible() : item.visible !== false)
+function visible(item: MenuItem) {
+  return typeof item.visible === "function"
+    ? item.visible()
+    : item.visible !== false;
 }
+void visible;
 </script>
 
 <template>

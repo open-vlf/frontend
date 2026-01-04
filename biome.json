@@ -13,7 +13,10 @@
       "!dist",
       "!build",
       "!.idea",
-      "!.firebase"
+      "!.firebase",
+      "!public/assets/styles",
+      "!src/auto-import.d.ts",
+      "!src/components.d.ts"
     ]
   },
   "formatter": {

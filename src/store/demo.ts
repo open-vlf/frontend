@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
 import axios from "axios";
+import { defineStore } from "pinia";
 import { getAuthHeaders } from "../modules/firebase";
 
 export type typeABCDF = "A" | "B" | "C" | "D" | "F";
@@ -35,9 +35,9 @@ export const useDemoStore = defineStore("demo", {
     search: new Map<string, number>(),
     years: new Set<number>(),
     receivers: new Map<number, Set<string>>(),
-    transmitters: Array<string>(),
-    files: Array<File>(),
-    transmitterFiles: Array<File>(),
+    transmitters: [] as string[],
+    files: [] as File[],
+    transmitterFiles: [] as File[],
     plot: String,
   }),
   getters: {
@@ -66,7 +66,7 @@ export const useDemoStore = defineStore("demo", {
       this.transmitterFiles = [];
     },
     clearPlot(): void {
-      // @ts-ignore
+      // @ts-expect-error
       this.plot = null;
     },
     clearFiles(): void {
@@ -89,7 +89,7 @@ export const useDemoStore = defineStore("demo", {
           }`,
           {
             headers: await getAuthHeaders(),
-          }
+          },
         );
 
         this.years = new Set<number>();
@@ -103,11 +103,11 @@ export const useDemoStore = defineStore("demo", {
             value.stations.forEach((station: string) => {
               this.receivers.get(value.year)?.add(station);
             });
-          }
+          },
         );
-      } catch (e) {
+      } catch (_e) {
         alert(
-          "Couldn't fetch the years and stations information, please try again later"
+          "Couldn't fetch the years and stations information, please try again later",
         );
       }
     },
@@ -115,7 +115,7 @@ export const useDemoStore = defineStore("demo", {
       provider: string,
       year?: number,
       type?: "narrowband" | "broadband",
-      station?: string
+      station?: string,
     ): Promise<void> {
       try {
         const fileEndsWith = providerToExtension.get(provider);
@@ -139,9 +139,9 @@ export const useDemoStore = defineStore("demo", {
         response.data.forEach(
           (value: { count: number; date: string; stations: Array<string> }) => {
             this.search.set(value.date, value.count);
-          }
+          },
         );
-      } catch (e) {
+      } catch (_e) {
         this.search = new Map<string, number>();
       }
     },
@@ -152,13 +152,13 @@ export const useDemoStore = defineStore("demo", {
           { path: file.path },
           {
             headers: await getAuthHeaders(),
-          }
+          },
         );
 
         this.plot = response.data;
-      } catch (e) {
+      } catch (_e) {
         alert(
-          "Could not generate the plot for this file, please try again later."
+          "Could not generate the plot for this file, please try again later.",
         );
       }
     },
@@ -166,17 +166,17 @@ export const useDemoStore = defineStore("demo", {
       year: number,
       station: string,
       date: Date,
-      provider?: string
+      provider?: string,
     ): Promise<Array<string>> {
       const files = await this.searchFiles(
         year,
         "narrowband",
         station,
         date,
-        provider
+        provider,
       );
       const origins = files.map(
-        (file) => file.transmitter ?? file.fileName.slice(14, 17)
+        (file) => file.transmitter ?? file.fileName.slice(14, 17),
       );
       const result = [...new Set(origins)];
 
@@ -197,7 +197,7 @@ export const useDemoStore = defineStore("demo", {
       type: "narrowband" | "broadband",
       station: string,
       date: Date,
-      provider?: string
+      provider?: string,
     ): Promise<Array<File>> {
       const fileEndsWith = provider
         ? providerToExtension.get(provider)
@@ -212,7 +212,7 @@ export const useDemoStore = defineStore("demo", {
           }`,
           {
             headers: await getAuthHeaders(),
-          }
+          },
         );
 
         this.files = response.data.map((file) => {
@@ -220,15 +220,17 @@ export const useDemoStore = defineStore("demo", {
             return file;
           }
 
+          const typeABCDF = file.typeABCDF;
+
           return {
             ...file,
-            resolution: mapABCDF.get(file.typeABCDF!)?.[0],
-            phase: mapABCDF.get(file.typeABCDF!)?.[0],
+            resolution: typeABCDF ? mapABCDF.get(typeABCDF)?.[0] : undefined,
+            phase: typeABCDF ? mapABCDF.get(typeABCDF)?.[0] : undefined,
           };
         });
 
         return this.files;
-      } catch (e) {
+      } catch (_e) {
         alert("No records found");
       }
 

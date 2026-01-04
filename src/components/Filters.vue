@@ -1,18 +1,23 @@
 <script setup lang="ts">
+import { add, format, isBefore } from "date-fns";
 import type { Ref } from "vue";
 import { ref, watch } from "vue";
-import { add, format, isBefore } from "date-fns";
-import { useAuthStore, useDemoStore } from "@/store";
+import {
+  useAuthStore as createAuthStore,
+  useDemoStore as createDemoStore,
+} from "@/store";
 import type { File } from "@/store/demo";
 import { AWESOME, BROADBAND, NARROWBAND, noZoneDate, SAVNET } from "@/utils";
+
+void format;
 
 // Typing
 type SelectionStringRef = { name: string; code: string } | null;
 type SelectionNumberRef = { name: number; code: number } | null;
 
 // Logic
-const demo = useDemoStore();
-const authStore = useAuthStore();
+const demo = createDemoStore();
+const authStore = createAuthStore();
 
 // Date
 const selectedDate: Ref<Date | null> = ref(null);
@@ -66,8 +71,13 @@ async function onInitial(): Promise<void> {
   receivingStations.value = [];
   selectedYear.value = null;
 
-  await demo.searchYearsAndStations(selectedProvider.value!.code);
-  await demo.searchMap(selectedProvider.value!.code);
+  const providerCode = selectedProvider.value?.code;
+  if (!providerCode) {
+    return;
+  }
+
+  await demo.searchYearsAndStations(providerCode);
+  await demo.searchMap(providerCode);
 
   demo.getYears.forEach((value: number) => {
     years.value.push({ name: value, code: value });
@@ -110,7 +120,7 @@ async function onSearch(): Promise<void> {
     selectedProvider.value.code,
     selectedYear.value.code,
     selectedType.value.code as "narrowband" | "broadband",
-    selectedReceivingStation.value.code
+    selectedReceivingStation.value.code,
   );
 
   searchLoading.value = false;
@@ -133,7 +143,7 @@ async function onTransmitter(): Promise<void> {
     selectedYear.value.code,
     selectedReceivingStation.value.code,
     selectedDate.value,
-    selectedProvider.value.code
+    selectedProvider.value.code,
   );
 
   demo.getTransmitters.forEach((station) => {
@@ -147,14 +157,27 @@ async function onFiles(): Promise<void> {
   if (!selectedDate.value || !selectedDateRecords.value)
     return alert("Please a file before generating the plot!");
 
+  const selectedDateValue = selectedDate.value;
+  const selectedTypeValue = selectedType.value;
+  const selectedReceivingValue = selectedReceivingStation.value;
+  const selectedProviderValue = selectedProvider.value;
+
+  if (
+    !selectedDateValue ||
+    !selectedTypeValue ||
+    !selectedReceivingValue ||
+    !selectedProviderValue
+  )
+    return alert("Please a file before generating the plot!");
+
   filesLoading.value = true;
 
   await demo.searchFiles(
-    selectedDate.value!.getFullYear(),
-    selectedType.value!.name.toLowerCase() as "narrowband" | "broadband",
-    selectedReceivingStation.value!.name,
-    selectedDate.value!,
-    selectedProvider.value!.code
+    selectedDateValue.getFullYear(),
+    selectedTypeValue.name.toLowerCase() as "narrowband" | "broadband",
+    selectedReceivingValue.name,
+    selectedDateValue,
+    selectedProviderValue.code,
   );
 
   filesLoading.value = false;
@@ -183,10 +206,12 @@ async function onDownload(): Promise<void> {
 }
 
 async function onDownloadFile() {
-  window.open(selectedFile.value!.url, "_blank");
+  const file = selectedFile.value;
+  if (!file) return;
+  window.open(file.url, "_blank");
 }
 
-function isoDayOfWeek(dt: any) {
+function isoDayOfWeek(dt: Date) {
   let wd = dt.getDay(); // 0..6, from sunday
   wd = ((wd + 6) % 7) + 1; // 1..7 from monday
   return `${wd}`; // string so it gets parsed
@@ -221,6 +246,16 @@ function getData(): Array<object> {
 
   return [];
 }
+
+void onSelectDate;
+void providers;
+void types;
+void onSearch;
+void onTransmitter;
+void onFiles;
+void onPlot;
+void onDownload;
+void getData;
 
 watch(selectedProvider, (newValue, oldValue) => {
   if (newValue?.code === SAVNET.code) selectedType.value = BROADBAND;
